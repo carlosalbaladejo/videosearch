@@ -1,0 +1,9 @@
+#Do not commit video data
+.videos
+
+# env files
+.env
+**.env
+
+# database files
+data/*
