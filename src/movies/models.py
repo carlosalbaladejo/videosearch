@@ -9,10 +9,10 @@ class Movie(models.Model):
     """Clase para películas"""
 
     #:Nombre de la película
-    name = models.CharField(_('Nombre'), max_length=240)
+    title = models.CharField(_('Título'), max_length=240)
 
     #: path to movie file
-    path = models.CharField(_('file path'), max_length=240)
+    file = models.FileField(_('Archivo'), upload_to='static', max_length=240)
 
     def __str__(self):
         """Redefinición del método str"""

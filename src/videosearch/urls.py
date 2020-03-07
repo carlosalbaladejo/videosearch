@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
 from django.utils.translation import gettext_lazy as _
-
+from django.views.generic import TemplateView
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -51,6 +51,7 @@ SCHEMA_VIEW = get_schema_view(
 
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='index.html')),
     path('admin/', admin.site.urls),
     path('health/', include('health_check.urls')),
     # Autenticación

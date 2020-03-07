@@ -12,6 +12,6 @@ class MovieViewSet(ModelViewSet):
 
     queryset = Movie.objects.all()
     filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ('name')
-    ordering_fields = ('name')
+    search_fields = ('title')
+    ordering_fields = ('title')
     serializer_class = MovieSerializer
