@@ -1,27 +1,52 @@
 version: '3.4'
 
 services:
+  elasticsearch:
+    image: blacktop/elasticsearch:7.6.1
+    ports: 
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - ./data/es:/usr/share/elasticsearch/data
+
   db:
-    image: postgres:12
+    image: postgres:${POSTGRES_VERSION}
     # restart: always
     hostname: db
-    env_file:
-      - docker/postgres.env
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - 5432:5432
     volumes:
       - ./data/db:/var/lib/postgresql/data
  
   django:
-    build: .
+    build:
+      context: .
+      dockerfile: docker/django/Dockerfile
     hostname: django
-    # restart: always
-    # command: /wait_for_postgres.sh
+    restart: always
+    command: >
+      /bin/bash -c "
+        while ! curl -X GET elasticsearch:9200/_cluster/health --silent;
+        do
+          sleep 1;
+        done;
+        python manage.py runserver 0.0.0.0:8000
+      "
     user: 'video_user'
     depends_on:
       - db
-    env_file:
-      - docker/django.env
+      - elasticsearch
+    environment:
+      - SQL_ENGINE=${SQL_ENGINE}
+      - SQL_DATABASE=${SQL_DATABASE}
+      - SQL_USER=${SQL_USER}
+      - SQL_PASSWORD=${SQL_PASSWORD}
+      - SQL_HOST=${SQL_HOST}
+      - SQL_PORT=${SQL_PORT}
     ports:
       - 8000:8000
     volumes:

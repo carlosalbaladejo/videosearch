@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     # 3rd party
     ###
     'corsheaders',
+    'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl_drf',
     'django_extensions',
     'django_filters',
     'django_tgb_basics',
@@ -203,4 +205,11 @@ SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': True,
     'LOGIN_URL': '/admin/login',  # por qué no 'rest_framework:login'??
     'LOGOUT_URL': '/admin/logout',  # por qué no 'rest_framework:logout'??
+}
+
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'elasticsearch:9200'
+    },
 }
