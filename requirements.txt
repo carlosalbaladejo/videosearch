@@ -10,7 +10,7 @@ django-jet==1.0.8
 django-leaflet==0.26.0
 django-rosetta==0.9.3
 django-tgb-basics==0.2.11
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-gis==0.15
 djangorestframework-simplejwt==4.4.0
 drf-friendly-errors==0.13
