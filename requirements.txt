@@ -16,7 +16,7 @@ djangorestframework-simplejwt==4.4.0
 drf-friendly-errors==0.13
 drf-yasg==1.17.0
 drf-yasg[validation]
-gunicorn==20.0.4
+gunicorn==22.0.0
 psycopg2-binary==2.8.4
 python-dotenv==0.10.3
 # bandit==1.6.2
